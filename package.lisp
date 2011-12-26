@@ -1,2 +1,3 @@
 (restas:define-module #:cronies
-    (:use :cl :restas))
+    (:use :cl)
+  (:export #:main))

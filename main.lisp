@@ -1,4 +1,4 @@
 (in-package #:cronies)
 
 (defun main()
-  (start '#:cronies :port 8080))
+  (restas:start '#:cronies :port 8080))
