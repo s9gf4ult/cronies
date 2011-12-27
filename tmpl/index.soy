@@ -1,0 +1,28 @@
+{namespace cronies.tpl}
+{template index}
+  <!DOCTYPE html>
+  <html>
+    <head>
+      {if $content_type}
+        <meta http-equiv="Content-Type" content="{$content_type}"></meta>
+      {else}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      {/if}
+      {foreach $src3 in $styles}
+        <link rel="stylesheet" href="{$src3}" type="text/css"></link>
+      {/foreach}
+      {foreach $src1 in $scripts}
+        <script type="text/javascript">
+          {$src1}
+        </script>
+      {/foreach}
+      {foreach $src2 in $src_scripts}
+        <script type="text/javascript" src="{$src2}">
+        </script>
+      {/foreach}
+    </head>
+    <body>
+      {$body}
+    </body>
+  </html>
+{/template}
