@@ -11,3 +11,7 @@
      (log5:log-for (debug) ,message ,@args)))
 
 (log5:start-sender '*default-log-sender* (log5:stream-sender :location *log-file*) :category-spec '(log5:info+ debug) :output-spec '(formated-time log5:message))
+
+(defmethod restas:render-object :before (designer object)
+  (when *debugging*
+    (hunchentoot:no-cache)))
