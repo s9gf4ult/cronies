@@ -1,0 +1,26 @@
+{namespace cronies.tpl}
+{template img}
+  <img src="{print $src | escapeUri}"
+       {if $alt}
+         alt="{$alt}"
+       {/if}
+       {if $width}
+         width="{$width}"
+       {/if}
+       {if $height}
+         height="{$height}"
+       {/if}
+       {if $align}
+         align="{$align}"
+       {/if}
+       {if $usemap}
+         usemap={$usemap}
+       {/if}
+       {if $otherattrs}
+         {print $otherattrs | noAutoescape}
+       {/if}
+       >
+  </img>
+{/template}
+  
+  
