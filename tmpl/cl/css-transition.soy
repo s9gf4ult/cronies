@@ -1,0 +1,49 @@
+{namespace cronies.tpl}
+{template css-transition}
+  {if $property}
+    transition-property:{foreach $ppr in $property}{$ppr}{if not isLast($ppr)},{/if}{/foreach};
+  {else}
+    transition-property: all;
+  {/if}{\n}
+  {if $property}
+    -webkit-transition-property:{foreach $ppr in $property}{$ppr}{if not isLast($ppr)},{/if}{/foreach};
+  {else}
+    -webkit-transition-property: all;
+  {/if}{\n}
+  {if $property}
+    -o-transition-property:{foreach $ppr in $property}{$ppr}{if not isLast($ppr)},{/if}{/foreach};
+  {else}
+    -o-transition-property: all;
+  {/if}{\n}
+  {if $property}
+    -moz-transition-property:{foreach $ppr in $property}{$ppr}{if not isLast($ppr)},{/if}{/foreach};
+  {else}
+    -moz-transition-property: all;
+  {/if}{\n}
+  {if $property}
+    -ms-transition-property:{foreach $ppr in $property}{$ppr}{if not isLast($ppr)},{/if}{/foreach};
+  {else}
+    -ms-transition-property: all;
+  {/if}{\n}
+  {if $duration}
+    transition-duration:{$duration};{\n}
+    -moz-transition-duration:{$duration};{\n}
+    -webkit-transition-duration:{$duration};{\n}
+    -o-transition-duration:{$duration};{\n}
+    -ms-transition-duration:{$duration};{\n}
+  {/if}
+  {if $function}
+    transition-timing-function:{$function};{\n}
+    -moz-transition-timing-function:{$function};{\n}
+    -webkit-transition-timing-function:{$function};{\n}
+    -o-transition-timing-function:{$function};{\n}
+    -ms-transition-timing-function:{$function};{\n}
+  {/if}
+  {if $delay}
+    transition-delay:{$delay};{\n}
+    -moz-transition-delay:{$delay};{\n}
+    -webkit-transition-delay:{$delay};{\n}
+    -o-transition-delay:{$delay};{\n}
+    -ms-transition-delay:{$delay};{\n}
+  {/if}
+{/template}
