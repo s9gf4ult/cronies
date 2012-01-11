@@ -1,0 +1,4 @@
+{namespace cronies.tpl}
+{template css_shadow}
+  box-shadow:{if $inset}inset{/if}{sp}{foreach $lng in $length}{$lng}{sp}{/foreach}{$color};{\n}
+{/template}

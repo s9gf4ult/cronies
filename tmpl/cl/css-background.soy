@@ -1,0 +1,47 @@
+{namespace cronies.tpl}
+{template css_background}
+/*   (save-excursion */
+/*   (newline) */
+/*   (loop for x in '("color") */
+/*   do (insert (format "{if $%s} */
+/* background-%s: {$%s};{\\n} */
+/* {/if} */
+/* " (replace-regexp-in-string "-" "_" x) x (replace-regexp-in-string "-" "_" x))))) */
+  
+{if $color}
+background-color: {$color};{\n}
+{/if}
+
+/* (save-excursion */
+/* (newline) */
+/* (loop for x in '("repeat" "attachment" "position" "clop" "origin" "size" ) */
+/* do (let ((newsym (concat "blah" x)) */
+/*          (newx (replace-regexp-in-string "-" "_" x))) */
+/* (insert (format */
+/* "{if $%s} */
+/* background-%s: {foreach $%s in $%s}{$%s}{if not isLast($%s)}, {/if}{/foreach};{\\n} */
+/* {/if} */
+/* "  newx x newsym newx newsym newsym))))) */
+{if $repeat}
+background-repeat: {foreach $blahrepeat in $repeat}{$blahrepeat}{if not isLast($blahrepeat)}, {/if}{/foreach};{\n}
+{/if}
+{if $attachment}
+background-attachment: {foreach $blahattachment in $attachment}{$blahattachment}{if not isLast($blahattachment)}, {/if}{/foreach};{\n}
+{/if}
+{if $position}
+background-position: {foreach $blahposition in $position}{$blahposition}{if not isLast($blahposition)}, {/if}{/foreach};{\n}
+{/if}
+{if $clop}
+background-clop: {foreach $blahclop in $clop}{$blahclop}{if not isLast($blahclop)}, {/if}{/foreach};{\n}
+{/if}
+{if $origin}
+background-origin: {foreach $blahorigin in $origin}{$blahorigin}{if not isLast($blahorigin)}, {/if}{/foreach};{\n}
+{/if}
+{if $size}
+background-size: {foreach $blahsize in $size}{$blahsize}{if not isLast($blahsize)}, {/if}{/foreach};{\n}
+{/if}
+
+{if $image}
+  background-image: {foreach $img in $image}url('{print $img | escapeUri}'){if not isLast($img)}, {/if}{/foreach};{\n}
+{/if}
+{/template}

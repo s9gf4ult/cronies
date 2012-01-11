@@ -1,5 +1,5 @@
 {namespace cronies.tpl}
-{template css-transition}
+{template css_transition}
   {if $property}
     transition-property:{foreach $ppr in $property}{$ppr}{if not isLast($ppr)},{/if}{/foreach};
   {else}

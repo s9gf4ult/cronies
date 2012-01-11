@@ -1,0 +1,86 @@
+{namespace cronies.tpl}
+{template css_border}
+/* (save-excursion */
+/* (newline) */
+/* (loop for x in '("color" "left-color" "right-color" "top-color" "bottom-color" "style" "left-style" "right-style" "top-style" "bottom-style" "width" "left-width" "right-width" "top-width" "bottom-width" "radius" "left-radius" "right-radius" "top-radius" "bottom-radius" "image-slice" "image-width" "image-outset" "image-repeat") */
+/* do (insert (format "{if $%s} */
+/*   border-%s:{$%s};{\\n} */
+/* {/if} */
+/* " (replace-regexp-in-string "-" "_" x) x (replace-regexp-in-string "-" "_" x))))) */
+{if $color}
+  border-color:{$color};{\n}
+{/if}
+{if $left_color}
+  border-left-color:{$left_color};{\n}
+{/if}
+{if $right_color}
+  border-right-color:{$right_color};{\n}
+{/if}
+{if $top_color}
+  border-top-color:{$top_color};{\n}
+{/if}
+{if $bottom_color}
+  border-bottom-color:{$bottom_color};{\n}
+{/if}
+{if $style}
+  border-style:{$style};{\n}
+{/if}
+{if $left_style}
+  border-left-style:{$left_style};{\n}
+{/if}
+{if $right_style}
+  border-right-style:{$right_style};{\n}
+{/if}
+{if $top_style}
+  border-top-style:{$top_style};{\n}
+{/if}
+{if $bottom_style}
+  border-bottom-style:{$bottom_style};{\n}
+{/if}
+{if $width}
+  border-width:{$width};{\n}
+{/if}
+{if $left_width}
+  border-left-width:{$left_width};{\n}
+{/if}
+{if $right_width}
+  border-right-width:{$right_width};{\n}
+{/if}
+{if $top_width}
+  border-top-width:{$top_width};{\n}
+{/if}
+{if $bottom_width}
+  border-bottom-width:{$bottom_width};{\n}
+{/if}
+{if $radius}
+  border-radius:{$radius};{\n}
+{/if}
+{if $left_radius}
+  border-left-radius:{$left_radius};{\n}
+{/if}
+{if $right_radius}
+  border-right-radius:{$right_radius};{\n}
+{/if}
+{if $top_radius}
+  border-top-radius:{$top_radius};{\n}
+{/if}
+{if $bottom_radius}
+  border-bottom-radius:{$bottom_radius};{\n}
+{/if}
+{if $image_slice}
+  border-image-slice:{$image_slice};{\n}
+{/if}
+{if $image_width}
+  border-image-width:{$image_width};{\n}
+{/if}
+{if $image_outset}
+  border-image-outset:{$image_outset};{\n}
+{/if}
+{if $image_repeat}
+  border-image-repeat:{$image_repeat};{\n}
+{/if}
+{if $image}
+  border-image-source: utl('{print $image | escapeUri}');{\n}
+{/if}
+
+{/template}

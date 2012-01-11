@@ -1,0 +1,6 @@
+{namespace cronies.tpl}
+{template css_rule}
+  {foreach $selector in $selectors}{print $selector}{if not isLast($selector)}{sp}{/if}{/foreach}{\n}
+  {lb}{foreach $rule in $rules}{print $rule}{\n}{/foreach}
+  {rb}
+{/template}
