@@ -18,14 +18,4 @@
 
 (restas:define-route main-route ("")
   (debug-print "main route called")
-  (cronies.tpl:index `(:body
-                       ,(who:with-html-output-to-string (out)
-                                                        (:div :class "body"
-                                                              (:h1 "Here is random picture picker")
-                                                              (cronies.tpl:img `(:src ,(get-random-pic-uri)))
-                                                              (:input 
-                                                                                      
-                                                              
-                                                                               
-                                                                                      
-                                                        
+  (make-instance '
