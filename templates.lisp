@@ -45,3 +45,4 @@
   (walk-templates *js-templates-directory* #'compile-template-jscript-from-file)
   (walk-templates *common-templates-directory* #'compile-template-common-from-file))
 
+(recompile-all-templates)

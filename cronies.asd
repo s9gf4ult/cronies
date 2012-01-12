@@ -1,9 +1,11 @@
 (asdf:defsystem #:cronies
-  :depends-on (#:restas #:hunchentoot #:closure-template #:log5)
+  :depends-on (#:restas #:hunchentoot #:closure-template #:log5 #:clsql)
   :components ((:file "package")
                (:file "routes" :depends-on ("settings" "logging" "templates"))
-               (:file "main" :depends-on ("routes"))
+               (:file "main" :depends-on ("routes" "drawers" "content"))
                (:file "settings" :depends-on ("package"))
                (:file "logging" :depends-on ("package" "settings"))
                (:file "templates" :depends-on ("package" "settings"))
+               (:file "content" :depends-on ("package" "drawers" "templates"))
+               (:file "drawers" :depends-on ("package"))
                ))

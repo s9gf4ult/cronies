@@ -1,5 +1,5 @@
 {namespace cronies.tpl}
-{template index}
+{template main}
   <!DOCTYPE html>
   <html>
     <head>
@@ -8,8 +8,13 @@
       {else}
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
       {/if}
-      {foreach $src3 in $styles}
+      {foreach $src3 in $src_styles}
         <link rel="stylesheet" href="{print $src3 | escapeUri}" type="text/css"></link>
+      {/foreach}
+      {foreach $src4 in $styles}
+        <style type="text/css">
+          {$src4}
+        </style>
       {/foreach}
       {foreach $src1 in $scripts}
         <script type="text/javascript">

@@ -1,4 +1,7 @@
 (in-package #:cronies)
 
-(defclass ajax-drawer ()
+(defclass drawer ()
+  ())
+
+(defclass ajax-drawer (drawer)
   ())
