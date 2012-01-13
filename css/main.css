@@ -1,7 +1,8 @@
-p {
+p, h1 {
     font-family: arial;
 }
 
 h1 {
-    font-size: 20pt;
+    font-size: 200%;
 }
+

@@ -1,0 +1,3 @@
+$(document).onReady(function() {
+    
+})
