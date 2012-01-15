@@ -41,8 +41,13 @@
                           
 
 (defun recompile-all-templates ()
-  (walk-templates *cl-templates-directory* #'compile-template-lisp-from-file)
-  (walk-templates *js-templates-directory* #'compile-template-jscript-from-file)
-  (walk-templates *common-templates-directory* #'compile-template-common-from-file))
+  ;; (walk-templates *cl-templates-directory* #'compile-template-lisp-from-file)
+  ;; (walk-templates *js-templates-directory* #'compile-template-jscript-from-file)
+  ;; (walk-templates *common-templates-directory* #'compile-template-common-from-file))
+  (loop for a in (list (list *cl-templates-directory* #'compile-template-lisp-from-file)
+                         (list *js-templates-directory* #'compile-template-jscript-from-file)
+                         (list *common-templates-directory* #'compile-template-common-from-file))
+     when (fad:file-exists-p (car a))
+     do (apply #'walk-templates a)))
 
 (recompile-all-templates)

@@ -23,5 +23,4 @@
 
 (restas:define-route main-route ("")
   (debug-print "main route called")
-  (if (hunchentoot:cookies-in*
   (make-instance 'index-page))
