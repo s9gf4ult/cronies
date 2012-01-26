@@ -1,7 +1,7 @@
 (in-package #:cronies)
 
 (defmacro define-file-downloader (route-name route file-name directory-pathspec)
-  `(restas:define-route ,route-name (,route)
+  `(define-route ,route-name (,route)
      (let ((fname
             (fad:file-exists-p
              (merge-pathnames
@@ -23,4 +23,6 @@
 
 (restas:define-route main-route ("")
   (debug-print "main route called")
-  (make-instance 'index-page))
+  (if (logined)
+      (make-instance 'index-page)
+      (redirect login-route :next

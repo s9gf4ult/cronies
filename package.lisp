@@ -1,3 +1,3 @@
 (restas:define-module #:cronies
-    (:use :cl)
+    (:use #:cl #:restas #:postmodern #:alexandria)
   (:export #:main))
