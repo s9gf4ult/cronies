@@ -1,3 +1,3 @@
-$(document).onReady(function() {
+$(document).ready(function() {
     
 })

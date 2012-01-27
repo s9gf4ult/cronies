@@ -1,5 +1,5 @@
 (asdf:defsystem #:cronies
-  :depends-on (#:restas #:hunchentoot #:closure-template #:log5 #:postmodern #:alexandria)
+  :depends-on (#:restas #:hunchentoot #:closure-template #:log5 #:postmodern #:alexandria #:uuid #:ironclad #:ppcre)
   :components ((:file "package")
                (:file "routes" :depends-on ("settings" "logging" "templates"))
                (:file "storage" :depends-on ("package"))

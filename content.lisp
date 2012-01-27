@@ -25,27 +25,34 @@
 (defclass index-page (page)
   ())
 
-(defmethod restas:render-object ((designer ajax-drawer) (obj page)) t)
+(defclass login-page (page)
+  ((next :accessor login-page-next
+         :initform ""
+         :initarg :next
+         :documentation "Path to go after login")))
 
-(defmethod restas:render-object :around  ((designer ajax-drawer) (obj page))
+(defmethod render-object ((designer ajax-drawer) (obj page)) t) ;to stop general method combination at this point
+
+(defmethod render-object :around  ((designer ajax-drawer) (obj page))
   (call-next-method)
-  (cronies.tpl:main (list :styles (reverse (page-styles obj))
-                          :src_styles (reverse (page-src-styles obj))
-                          :scripts (reverse (page-scripts obj))
-                          :src_scripts (reverse (page-src-scripts obj))
+  (cronies.tpl:main (list :styles (page-styles obj)
+                          :src_styles (page-src-styles obj)
+                          :scripts (page-scripts obj)
+                          :src_scripts (page-src-scripts obj)
                           :body (page-content obj))))
 
-(defmethod restas:render-object :before ((designer ajax-drawer) (obj page))
-  (push "/css/main.css"
-        (page-src-styles obj))
-  (push "/js/right.js"
-        (page-src-scripts obj))
-  (push "/js/main.js"
-        (page-src-scripts obj)))
+(defmethod render-object :before ((designer ajax-drawer) (obj page))
+  (appendf (page-src-styles obj)
+           '("/css/main.css"))
+  (appendf (page-src-scripts obj)
+           '("/js/jquery.js"
+             "/js/main.js"))) 
 
-
-(defmethod restas:render-object :before ((designer ajax-drawer) (obj index-page))
+(defmethod render-object :before ((designer ajax-drawer) (obj index-page))
   (declare (ignore designer))
   (setf 
    (page-content obj)
    (cronies.tpl:index)))
+
+(defmethod render-object :before ((designer ajax-drawer) (obj login-page))
+  
