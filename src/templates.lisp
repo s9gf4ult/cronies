@@ -49,5 +49,3 @@
                          (list *common-templates-directory* #'compile-template-common-from-file))
      when (fad:file-exists-p (car a))
      do (apply #'walk-templates a)))
-
-(recompile-all-templates)

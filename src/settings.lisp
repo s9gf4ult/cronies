@@ -1,8 +1,10 @@
 (in-package #:cronies)
 
 
-(defvar *site-directory* (fad:pathname-as-directory
-                          (asdf:system-source-directory '#:cronies)))
+(defvar *site-directory* (fad:file-exists-p
+                          (merge-pathnames
+                            (make-pathname :directory '(:relative :up))
+                            (asdf:system-source-directory '#:cronies))))
 
 (defvar *js-files-directory* (fad:pathname-as-directory
                               (merge-pathnames
@@ -44,7 +46,3 @@
                                        #P"common/"
                                        *templates-directory*)))
 
-(defvar *jscript-templates* (make-hash-table :test #'equal))
-                                
-
-(defvar *debugging* nil)

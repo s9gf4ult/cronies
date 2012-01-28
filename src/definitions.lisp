@@ -1,12 +1,51 @@
 (in-package #:cronies)
 
+;;;;;;;;;;;;;
+;; globals ;;
+;;;;;;;;;;;;;
+
+(defvar *jscript-templates* (make-hash-table :test #'equal)) ;place where all compiled javascript templates are
+(defvar *debugging* nil)                ;if true debug messages will be printed
+
+;;;;;;;;;;;;;;;
+;; templates ;;
+;;;;;;;;;;;;;;;
+
+(recompile-all-templates)
+
+;;;;;;;;;;;;;;;;
+;; postmodern ;;
+;;;;;;;;;;;;;;;;
+
 (cl-postgres:set-sql-datetime-readers
  :timestamp-with-timezone               ;timestamp with time zone type does not work without this
  #'(lambda (stamp)
      (+ (/ stamp 1000000) (encode-universal-time 0 0 0 1 1 2000 0))))
 
+;;;;;;;;;;;;;
+;; logging ;;
+;;;;;;;;;;;;;
+
+(log5:defoutput formated-time
+    (datetime-isoformat (get-universal-time)))
+
+(log5:defcategory debug)
+
+(log5:start-sender '*default-log-sender* (log5:stream-sender :location *log-file*) :category-spec '(log5:info+ debug) :output-spec '(formated-time log5:category log5:message))
+
+(defmethod restas:render-object :before (designer object)
+  (when *debugging*
+    (hunchentoot:no-cache)))
+
+;;;;;;;;;;;;;
+;; content ;;
+;;;;;;;;;;;;;
+
 (defclass page ()
-  ((scripts :accessor page-scripts
+  ((content-type :accessor page-content-type
+                 :initarg :content-type
+                 :documentation "Content type to return in HTTP header")
+   (scripts :accessor page-scripts
             :initform ()
             :initarg :scripts
             :documentation "List of strings with scripts")
@@ -35,3 +74,13 @@
          :initform ""
          :initarg :next
          :documentation "Path to go after login")))
+
+;;;;;;;;;;;;;
+;; drawers ;;
+;;;;;;;;;;;;;
+
+(defclass drawer ()
+  ())
+
+(defclass ajax-drawer (drawer)
+  ())

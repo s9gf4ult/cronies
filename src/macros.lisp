@@ -40,3 +40,17 @@
   `(let ((,varname (hunchentoot:cookie-in "session")))
      (when ,varname
        ,@body)))
+
+;;;;;;;;;;;;
+;; common ;;
+;;;;;;;;;;;;
+
+(defmacro prependf (&rest args)
+  (let ((target (lastcar args))
+        (elts (subseq args 0 (1- (length args)))))
+    (let ((elements (mapcar #'(lambda (a)
+                                (if (listp a)
+                                    a
+                                    `(list ,a))) elts)))
+      `(setf ,target
+             (append ,@elements ,target)))))
