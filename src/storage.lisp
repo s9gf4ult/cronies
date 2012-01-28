@@ -21,10 +21,6 @@ inner join session as s on p.session_id = s.id
 where p.name = 'participant' and s.uuid = $1"
   :plist)
 
-(defmacro with-browser-session (varname &body body)
-  `(let ((,varname (hunchentoot:cookie-in "session")))
-     (when ,varname
-       ,@body)))
 
 (defun session-user ()
   (with-browser-session uuid

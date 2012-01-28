@@ -6,12 +6,6 @@
 
 (log5:defcategory debug)
 
-(defmacro debug-print (message &rest args)
-  `(when *debugging*
-     (log5:log-for (debug) ,message ,@args)))
-
-(defmacro warning-print (message &rest args)
-  `(log5:log-for (log5:warn) ,message ,@args))
 
 (log5:start-sender '*default-log-sender* (log5:stream-sender :location *log-file*) :category-spec '(log5:info+ debug) :output-spec '(formated-time log5:category log5:message))
 
