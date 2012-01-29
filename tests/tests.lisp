@@ -29,4 +29,10 @@
   (let* ((passwd (write-to-string (uuid:make-v4-uuid)))
          (salted (cronies::salt-password passwd)))
     (ensure (cronies::check-password salted passwd))))
-   
+
+(addtest (all-tests)
+  generate-pairs
+  (let ((x 10)
+        (y nil))
+    (ensure-same (list 'x x) (cronies::generate-pairs x))
+    (ensure-same nil (cronies::generate-pairs y))))

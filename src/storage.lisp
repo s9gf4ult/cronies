@@ -34,19 +34,6 @@ where p.name = 'participant' and s.uuid = $1"
   (with-browser-session uuid
     (get-participant-by-session uuid)))
 
-(defun loginedp ()
-  "Return t if session set in cookies and exists in database"
-  (when (or (session-guest)
-            (session-user)
-            (session-participant))
-    t))
-
-(defun format-date (universal-time)
-  "return string representing universal time as iso formated string"
-  (apply #'format nil "~a-~a-~a ~a:~a:~a" (reverse
-                                           (subseq
-                                            (multiple-value-list (decode-universal-time universal-time))
-                                            0 6))))
 
 (defprepared-with-names create-session (&key (creation-date (get-universal-time))
                                              (expiration-interval 172800)) ;this is just two days in seconds (default)
@@ -55,7 +42,7 @@ where p.name = 'participant' and s.uuid = $1"
                    'uuid '$1
                    'creation_date '$2
                    'expiration_date '$3
-                   :returning 'id 'uuid) (write-to-string (make-v4-uuid)) (format-date creation-date) (format-date (+ creation-date expiration-interval)))
+                   :returning 'id 'uuid) (write-to-string (make-v4-uuid)) (datetime-isoformat creation-date) (datetime-isoformat (+ creation-date expiration-interval)))
     :plist)
 
 (defmacro generate-pairs (&rest names)
