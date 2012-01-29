@@ -11,14 +11,19 @@
   (:documentation "return string containing rendered page"))
 
 (defmethod render-page ((pg page))
-  (apply #'cronies.tpl:main
-         (append (when (slot-boundp pg 'content-type)
-                   (list :content-type (page-content-type pg)))
-                 (list :src-styles (page-src-styles pg)
-                       :src-scripts (page-src-scripts pg)
-                       :styles (page-styles pg)
-                       :scripts (page-scripts pg)
-                       :body (page-content pg)))))
+  (macrolet ((when-slot (slot-name accessor symbol)
+               (with-gensyms (slot)
+                 `(let ((,slot (and (slot-boundp pg ',slot-name)
+                                    (,accessor pg))))
+                    (when ,slot
+                      (list ,symbol ,slot))))))
+    (cronies.tpl:main
+     (append (when-slot content-type page-content-type :content-type)
+             (when-slot src-styles page-src-styles :src-styles)
+             (when-slot src-scripts page-src-scripts :src-scripts)
+             (when-slot styles page-styles :styles)
+             (when-slot scripts page-scripts :scripts)
+             (when-slot content page-content :body)))))
 
 (defmethod render-object ((designer ajax-drawer) (obj index-page))
   (page-append-defaults obj)

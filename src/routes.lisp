@@ -13,4 +13,6 @@
   (debug-print "main route called")
   (if (loginedp)
       (make-instance 'index-page)
-      (redirect login-route :path "")))
+      (progn
+        (create-new-browser-session)
+        (redirect 'login-route :path ""))))
